@@ -1,15 +1,17 @@
-from flask import Flask, request, jsonify
+from flask import Flask, jsonify
 
 app = Flask(__name__)
 
-@app.route('/webhook', methods=['POST'])
-def webhook():
-    # Recebe os dados enviados para o webhook
-    data = request.json
-    
-    # Faça qualquer processamento necessário com os dados recebidos
-    # Neste exemplo, simplesmente devolvemos os dados recebidos
-    return jsonify(data)
+# Rota para raiz da API
+@app.route('/')
+def index():
+    return 'Bem-vindo à API!'
+
+# Rota para retornar dados
+@app.route('/dados')
+def get_data():
+    dados = {'nome': 'João', 'idade': 30, 'cidade': 'São Paulo'}
+    return jsonify(dados)
 
 if __name__ == '__main__':
     app.run(debug=True)
